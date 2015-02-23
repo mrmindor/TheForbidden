@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CardDesignModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AlchemyCards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Element" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="VictoryPoints" Type="int" />
+          <Property Name="Rank" Type="int" />
+        </EntityType>
+        <EntityType Name="AlchemyCost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="ElementA" Type="int" />
+          <Property Name="ElementB" Type="int" />
+          <Property Name="ElementC" Type="int" />
+          <Property Name="ElementD" Type="int" />
+        </EntityType>
+        <EntityType Name="AlchemyElements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Initial" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="StrokeColor" Type="nchar" MaxLength="10" />
+          <Property Name="FillColor" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="AlchemyGoals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VictoryPoints" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AlchemyRank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Deck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CardDesign.dbo.DeckCards' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DeckCards">
+          <Key>
+            <PropertyRef Name="DeckId" />
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="DeckId" Type="int" Nullable="false" />
+          <Property Name="CardId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CardDesign.dbo.DeckGoals' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DeckGoals">
+          <Key>
+            <PropertyRef Name="DeckId" />
+            <PropertyRef Name="GoalId" />
+          </Key>
+          <Property Name="DeckId" Type="int" Nullable="false" />
+          <Property Name="GoalId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CardDesign.dbo.GoalCards' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GoalCards">
+          <Key>
+            <PropertyRef Name="GoalId" />
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="GoalId" Type="int" Nullable="false" />
+          <Property Name="CardId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AlchemyCards_AlchemyElements">
+          <End Role="AlchemyElements" Type="Self.AlchemyElements" Multiplicity="1" />
+          <End Role="AlchemyCards" Type="Self.AlchemyCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCards">
+              <PropertyRef Name="Element" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCards_AlchemyRank">
+          <End Role="AlchemyRank" Type="Self.AlchemyRank" Multiplicity="0..1" />
+          <End Role="AlchemyCards" Type="Self.AlchemyCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyRank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCards">
+              <PropertyRef Name="Rank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyCards">
+          <End Role="AlchemyCards" Type="Self.AlchemyCards" Multiplicity="1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyElements_A">
+          <End Role="AlchemyElements" Type="Self.AlchemyElements" Multiplicity="0..1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="ElementA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyElements_B">
+          <End Role="AlchemyElements" Type="Self.AlchemyElements" Multiplicity="0..1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="ElementB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyElements_C">
+          <End Role="AlchemyElements" Type="Self.AlchemyElements" Multiplicity="0..1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="ElementC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyElements_D">
+          <End Role="AlchemyElements" Type="Self.AlchemyElements" Multiplicity="0..1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="ElementD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeckCards_AlchemyCards">
+          <End Role="AlchemyCards" Type="Self.AlchemyCards" Multiplicity="1" />
+          <End Role="DeckCards" Type="Self.DeckCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeckCards">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeckCards_Deck">
+          <End Role="Deck" Type="Self.Deck" Multiplicity="1" />
+          <End Role="DeckCards" Type="Self.DeckCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deck">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeckCards">
+              <PropertyRef Name="DeckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeckGoals_Deck">
+          <End Role="Deck" Type="Self.Deck" Multiplicity="1" />
+          <End Role="DeckGoals" Type="Self.DeckGoals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deck">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeckGoals">
+              <PropertyRef Name="DeckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeckGoals_GoalCards">
+          <End Role="AlchemyGoals" Type="Self.AlchemyGoals" Multiplicity="1" />
+          <End Role="DeckGoals" Type="Self.DeckGoals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyGoals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeckGoals">
+              <PropertyRef Name="GoalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoalCards_AlchemyCards">
+          <End Role="AlchemyCards" Type="Self.AlchemyCards" Multiplicity="1" />
+          <End Role="GoalCards" Type="Self.GoalCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoalCards">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoalCards_AlchemyGoals">
+          <End Role="AlchemyGoals" Type="Self.AlchemyGoals" Multiplicity="1" />
+          <End Role="GoalCards" Type="Self.GoalCards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyGoals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GoalCards">
+              <PropertyRef Name="GoalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CardDesignModelStoreContainer">
+          <EntitySet Name="AlchemyCards" EntityType="Self.AlchemyCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlchemyCost" EntityType="Self.AlchemyCost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlchemyElements" EntityType="Self.AlchemyElements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlchemyGoals" EntityType="Self.AlchemyGoals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlchemyRank" EntityType="Self.AlchemyRank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deck" EntityType="Self.Deck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeckCards" EntityType="Self.DeckCards" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DeckCards].[DeckId] AS [DeckId], 
+    [DeckCards].[CardId] AS [CardId]
+    FROM [dbo].[DeckCards] AS [DeckCards]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DeckGoals" EntityType="Self.DeckGoals" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DeckGoals].[DeckId] AS [DeckId], 
+    [DeckGoals].[GoalId] AS [GoalId]
+    FROM [dbo].[DeckGoals] AS [DeckGoals]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GoalCards" EntityType="Self.GoalCards" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GoalCards].[GoalId] AS [GoalId], 
+    [GoalCards].[CardId] AS [CardId]
+    FROM [dbo].[GoalCards] AS [GoalCards]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AlchemyCards_AlchemyElements" Association="Self.FK_AlchemyCards_AlchemyElements">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCards" EntitySet="AlchemyCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCards_AlchemyRank" Association="Self.FK_AlchemyCards_AlchemyRank">
+            <End Role="AlchemyRank" EntitySet="AlchemyRank" />
+            <End Role="AlchemyCards" EntitySet="AlchemyCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyCards" Association="Self.FK_AlchemyCost_AlchemyCards">
+            <End Role="AlchemyCards" EntitySet="AlchemyCards" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyElements_A" Association="Self.FK_AlchemyCost_AlchemyElements_A">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyElements_B" Association="Self.FK_AlchemyCost_AlchemyElements_B">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyElements_C" Association="Self.FK_AlchemyCost_AlchemyElements_C">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyElements_D" Association="Self.FK_AlchemyCost_AlchemyElements_D">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeckCards_AlchemyCards" Association="Self.FK_DeckCards_AlchemyCards">
+            <End Role="AlchemyCards" EntitySet="AlchemyCards" />
+            <End Role="DeckCards" EntitySet="DeckCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeckCards_Deck" Association="Self.FK_DeckCards_Deck">
+            <End Role="Deck" EntitySet="Deck" />
+            <End Role="DeckCards" EntitySet="DeckCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeckGoals_Deck" Association="Self.FK_DeckGoals_Deck">
+            <End Role="Deck" EntitySet="Deck" />
+            <End Role="DeckGoals" EntitySet="DeckGoals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeckGoals_GoalCards" Association="Self.FK_DeckGoals_GoalCards">
+            <End Role="AlchemyGoals" EntitySet="AlchemyGoals" />
+            <End Role="DeckGoals" EntitySet="DeckGoals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoalCards_AlchemyCards" Association="Self.FK_GoalCards_AlchemyCards">
+            <End Role="AlchemyCards" EntitySet="AlchemyCards" />
+            <End Role="GoalCards" EntitySet="GoalCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoalCards_AlchemyGoals" Association="Self.FK_GoalCards_AlchemyGoals">
+            <End Role="AlchemyGoals" EntitySet="AlchemyGoals" />
+            <End Role="GoalCards" EntitySet="GoalCards" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CardDesignModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AlchemyCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Element" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VictoryPoints" Type="Int32" />
+          <Property Name="Rank" Type="Int32" />
+          <NavigationProperty Name="AlchemyElement" Relationship="Self.FK_AlchemyCards_AlchemyElements" FromRole="AlchemyCards" ToRole="AlchemyElements" />
+          <NavigationProperty Name="AlchemyRank" Relationship="Self.FK_AlchemyCards_AlchemyRank" FromRole="AlchemyCards" ToRole="AlchemyRank" />
+          <NavigationProperty Name="AlchemyCosts" Relationship="Self.FK_AlchemyCost_AlchemyCards" FromRole="AlchemyCards" ToRole="AlchemyCost" />
+          <NavigationProperty Name="Decks" Relationship="CardDesignModel.DeckCards" FromRole="AlchemyCard" ToRole="Deck" />
+          <NavigationProperty Name="AlchemyGoals" Relationship="CardDesignModel.GoalCards" FromRole="AlchemyCard" ToRole="AlchemyGoal" />
+        </EntityType>
+        <EntityType Name="AlchemyCost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="ElementA" Type="Int32" />
+          <Property Name="ElementB" Type="Int32" />
+          <Property Name="ElementC" Type="Int32" />
+          <Property Name="ElementD" Type="Int32" />
+          <NavigationProperty Name="AlchemyCard" Relationship="Self.FK_AlchemyCost_AlchemyCards" FromRole="AlchemyCost" ToRole="AlchemyCards" />
+          <NavigationProperty Name="AlchemyElement" Relationship="Self.FK_AlchemyCost_AlchemyElements_A" FromRole="AlchemyCost" ToRole="AlchemyElements" />
+          <NavigationProperty Name="AlchemyElement1" Relationship="Self.FK_AlchemyCost_AlchemyElements_B" FromRole="AlchemyCost" ToRole="AlchemyElements" />
+          <NavigationProperty Name="AlchemyElement2" Relationship="Self.FK_AlchemyCost_AlchemyElements_C" FromRole="AlchemyCost" ToRole="AlchemyElements" />
+          <NavigationProperty Name="AlchemyElement3" Relationship="Self.FK_AlchemyCost_AlchemyElements_D" FromRole="AlchemyCost" ToRole="AlchemyElements" />
+        </EntityType>
+        <EntityType Name="AlchemyElement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Initial" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="StrokeColor" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FillColor" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AlchemyCards" Relationship="Self.FK_AlchemyCards_AlchemyElements" FromRole="AlchemyElements" ToRole="AlchemyCards" />
+          <NavigationProperty Name="AlchemyCosts" Relationship="Self.FK_AlchemyCost_AlchemyElements_A" FromRole="AlchemyElements" ToRole="AlchemyCost" />
+          <NavigationProperty Name="AlchemyCosts1" Relationship="Self.FK_AlchemyCost_AlchemyElements_B" FromRole="AlchemyElements" ToRole="AlchemyCost" />
+          <NavigationProperty Name="AlchemyCosts2" Relationship="Self.FK_AlchemyCost_AlchemyElements_C" FromRole="AlchemyElements" ToRole="AlchemyCost" />
+          <NavigationProperty Name="AlchemyCosts3" Relationship="Self.FK_AlchemyCost_AlchemyElements_D" FromRole="AlchemyElements" ToRole="AlchemyCost" />
+        </EntityType>
+        <EntityType Name="AlchemyRank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AlchemyCards" Relationship="Self.FK_AlchemyCards_AlchemyRank" FromRole="AlchemyRank" ToRole="AlchemyCards" />
+        </EntityType>
+        <EntityType Name="Deck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AlchemyCards" Relationship="CardDesignModel.DeckCards" FromRole="Deck" ToRole="AlchemyCard" />
+          <NavigationProperty Name="AlchemyGoals" Relationship="CardDesignModel.DeckGoals" FromRole="Deck" ToRole="AlchemyGoal" />
+        </EntityType>
+        <Association Name="FK_AlchemyCards_AlchemyElements">
+          <End Role="AlchemyElements" Type="Self.AlchemyElement" Multiplicity="1" />
+          <End Role="AlchemyCards" Type="Self.AlchemyCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCards">
+              <PropertyRef Name="Element" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCards_AlchemyRank">
+          <End Role="AlchemyRank" Type="Self.AlchemyRank" Multiplicity="0..1" />
+          <End Role="AlchemyCards" Type="Self.AlchemyCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyRank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCards">
+              <PropertyRef Name="Rank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyCards">
+          <End Role="AlchemyCards" Type="Self.AlchemyCard" Multiplicity="1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyElements_A">
+          <End Role="AlchemyElements" Type="Self.AlchemyElement" Multiplicity="0..1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="ElementA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyElements_B">
+          <End Role="AlchemyElements" Type="Self.AlchemyElement" Multiplicity="0..1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="ElementB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyElements_C">
+          <End Role="AlchemyElements" Type="Self.AlchemyElement" Multiplicity="0..1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="ElementC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AlchemyCost_AlchemyElements_D">
+          <End Role="AlchemyElements" Type="Self.AlchemyElement" Multiplicity="0..1" />
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlchemyElements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AlchemyCost">
+              <PropertyRef Name="ElementD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CardDesignEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AlchemyCards" EntityType="Self.AlchemyCard" />
+          <EntitySet Name="AlchemyCosts" EntityType="Self.AlchemyCost" />
+          <EntitySet Name="AlchemyElements" EntityType="Self.AlchemyElement" />
+          <EntitySet Name="AlchemyRanks" EntityType="Self.AlchemyRank" />
+          <EntitySet Name="Decks" EntityType="Self.Deck" />
+          <AssociationSet Name="FK_AlchemyCards_AlchemyElements" Association="Self.FK_AlchemyCards_AlchemyElements">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCards" EntitySet="AlchemyCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCards_AlchemyRank" Association="Self.FK_AlchemyCards_AlchemyRank">
+            <End Role="AlchemyRank" EntitySet="AlchemyRanks" />
+            <End Role="AlchemyCards" EntitySet="AlchemyCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyCards" Association="Self.FK_AlchemyCost_AlchemyCards">
+            <End Role="AlchemyCards" EntitySet="AlchemyCards" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyElements_A" Association="Self.FK_AlchemyCost_AlchemyElements_A">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyElements_B" Association="Self.FK_AlchemyCost_AlchemyElements_B">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyElements_C" Association="Self.FK_AlchemyCost_AlchemyElements_C">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AlchemyCost_AlchemyElements_D" Association="Self.FK_AlchemyCost_AlchemyElements_D">
+            <End Role="AlchemyElements" EntitySet="AlchemyElements" />
+            <End Role="AlchemyCost" EntitySet="AlchemyCosts" />
+          </AssociationSet>
+          <AssociationSet Name="DeckCards" Association="CardDesignModel.DeckCards">
+            <End Role="AlchemyCard" EntitySet="AlchemyCards" />
+            <End Role="Deck" EntitySet="Decks" />
+          </AssociationSet>
+          <EntitySet Name="AlchemyGoals" EntityType="CardDesignModel.AlchemyGoal" />
+          <AssociationSet Name="DeckGoals" Association="CardDesignModel.DeckGoals">
+            <End Role="Deck" EntitySet="Decks" />
+            <End Role="AlchemyGoal" EntitySet="AlchemyGoals" />
+          </AssociationSet>
+          <AssociationSet Name="GoalCards" Association="CardDesignModel.GoalCards">
+            <End Role="AlchemyCard" EntitySet="AlchemyCards" />
+            <End Role="AlchemyGoal" EntitySet="AlchemyGoals" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="DeckCards">
+          <End Type="CardDesignModel.AlchemyCard" Role="AlchemyCard" Multiplicity="*" />
+          <End Type="CardDesignModel.Deck" Role="Deck" Multiplicity="*" />
+        </Association>
+        <EntityType Name="AlchemyGoal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VictoryPoints" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Decks" Relationship="CardDesignModel.DeckGoals" FromRole="AlchemyGoal" ToRole="Deck" />
+          <NavigationProperty Name="AlchemyCards" Relationship="CardDesignModel.GoalCards" FromRole="AlchemyGoal" ToRole="AlchemyCard" />
+        </EntityType>
+        <Association Name="DeckGoals">
+          <End Type="CardDesignModel.Deck" Role="Deck" Multiplicity="*" />
+          <End Type="CardDesignModel.AlchemyGoal" Role="AlchemyGoal" Multiplicity="*" />
+        </Association>
+        <Association Name="GoalCards">
+          <End Type="CardDesignModel.AlchemyCard" Role="AlchemyCard" Multiplicity="*" />
+          <End Type="CardDesignModel.AlchemyGoal" Role="AlchemyGoal" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CardDesignModelStoreContainer" CdmEntityContainer="CardDesignEntities">
+          <EntitySetMapping Name="AlchemyCards">
+            <EntityTypeMapping TypeName="CardDesignModel.AlchemyCard">
+              <MappingFragment StoreEntitySet="AlchemyCards">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Element" ColumnName="Element" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="VictoryPoints" ColumnName="VictoryPoints" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlchemyCosts">
+            <EntityTypeMapping TypeName="CardDesignModel.AlchemyCost">
+              <MappingFragment StoreEntitySet="AlchemyCost">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="ElementA" ColumnName="ElementA" />
+                <ScalarProperty Name="ElementB" ColumnName="ElementB" />
+                <ScalarProperty Name="ElementC" ColumnName="ElementC" />
+                <ScalarProperty Name="ElementD" ColumnName="ElementD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlchemyElements">
+            <EntityTypeMapping TypeName="CardDesignModel.AlchemyElement">
+              <MappingFragment StoreEntitySet="AlchemyElements">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Initial" ColumnName="Initial" />
+                <ScalarProperty Name="StrokeColor" ColumnName="StrokeColor" />
+                <ScalarProperty Name="FillColor" ColumnName="FillColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlchemyRanks">
+            <EntityTypeMapping TypeName="CardDesignModel.AlchemyRank">
+              <MappingFragment StoreEntitySet="AlchemyRank">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Decks">
+            <EntityTypeMapping TypeName="CardDesignModel.Deck">
+              <MappingFragment StoreEntitySet="Deck">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DeckCards" TypeName="CardDesignModel.DeckCards" StoreEntitySet="DeckCards">
+            <EndProperty Name="Deck">
+              <ScalarProperty Name="Id" ColumnName="DeckId" />
+            </EndProperty>
+            <EndProperty Name="AlchemyCard">
+              <ScalarProperty Name="Id" ColumnName="CardId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="AlchemyGoals">
+            <EntityTypeMapping TypeName="CardDesignModel.AlchemyGoal">
+              <MappingFragment StoreEntitySet="AlchemyGoals">
+                <ScalarProperty Name="VictoryPoints" ColumnName="VictoryPoints" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DeckGoals" TypeName="CardDesignModel.DeckGoals" StoreEntitySet="DeckGoals">
+            <EndProperty Name="AlchemyGoal">
+              <ScalarProperty Name="Id" ColumnName="GoalId" />
+            </EndProperty>
+            <EndProperty Name="Deck">
+              <ScalarProperty Name="Id" ColumnName="DeckId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="GoalCards" TypeName="CardDesignModel.GoalCards" StoreEntitySet="GoalCards">
+            <EndProperty Name="AlchemyGoal">
+              <ScalarProperty Name="Id" ColumnName="GoalId" />
+            </EndProperty>
+            <EndProperty Name="AlchemyCard">
+              <ScalarProperty Name="Id" ColumnName="CardId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "src\Test\Test.cspro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeckEditor", "src\DeckEditor\DeckEditor.csproj", "{2541178F-53C2-4F90-8AEF-572958DDCC64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.Test", "src\Model.Test\Model.Test.csproj", "{ACD40912-B3A9-4557-97ED-386A4C0EF801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "src\Model\Model.csproj", "{BCC2A753-BF48-4DAF-AF96-D84FFC8D4202}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2541178F-53C2-4F90-8AEF-572958DDCC64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2541178F-53C2-4F90-8AEF-572958DDCC64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2541178F-53C2-4F90-8AEF-572958DDCC64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACD40912-B3A9-4557-97ED-386A4C0EF801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD40912-B3A9-4557-97ED-386A4C0EF801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD40912-B3A9-4557-97ED-386A4C0EF801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD40912-B3A9-4557-97ED-386A4C0EF801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCC2A753-BF48-4DAF-AF96-D84FFC8D4202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC2A753-BF48-4DAF-AF96-D84FFC8D4202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC2A753-BF48-4DAF-AF96-D84FFC8D4202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC2A753-BF48-4DAF-AF96-D84FFC8D4202}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

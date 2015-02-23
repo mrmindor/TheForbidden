@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5df5d4c8ac4f4c66be2d930f54ef69cc" Name="Diagram1">
+        <EntityTypeShape EntityType="CardDesignModel.AlchemyCard" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CardDesignModel.AlchemyCost" Width="1.5" PointX="5.125" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CardDesignModel.AlchemyElement" Width="1.5" PointX="2.875" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CardDesignModel.AlchemyRank" Width="1.5" PointX="0.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CardDesignModel.Deck" Width="1.5" PointX="6.375" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="CardDesignModel.FK_AlchemyCards_AlchemyElements" ManuallyRouted="false" />
+        <AssociationConnector Association="CardDesignModel.FK_AlchemyCards_AlchemyRank" ManuallyRouted="false" />
+        <AssociationConnector Association="CardDesignModel.FK_AlchemyCost_AlchemyCards" ManuallyRouted="false" />
+        <AssociationConnector Association="CardDesignModel.FK_AlchemyCost_AlchemyElements_A" ManuallyRouted="false" />
+        <AssociationConnector Association="CardDesignModel.FK_AlchemyCost_AlchemyElements_B" ManuallyRouted="false" />
+        <AssociationConnector Association="CardDesignModel.FK_AlchemyCost_AlchemyElements_C" ManuallyRouted="false" />
+        <AssociationConnector Association="CardDesignModel.FK_AlchemyCost_AlchemyElements_D" ManuallyRouted="false" />
+        <AssociationConnector Association="CardDesignModel.DeckCards" />
+        <EntityTypeShape EntityType="CardDesignModel.AlchemyGoal" Width="1.5" PointX="9.25" PointY="1.5" />
+        <AssociationConnector Association="CardDesignModel.DeckGoals" />
+        <AssociationConnector Association="CardDesignModel.GoalCards" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
