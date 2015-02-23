@@ -14,7 +14,7 @@ namespace GameFlow.Common
 
         public static CardAbility FreeCardFromPool = (p1, p2, pool) =>
                                                      {
-                                                         p1.DiscardPile.Add();
+                                                         //p1.DiscardPile.Add();
                                                      };
     }
 

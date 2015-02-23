@@ -1,0 +1,10 @@
+/src/DeckEditor/bin
+/src/DeckEditor/obj
+/src/GameFlow/obj
+/src/GameFlow/bin
+/src/Model/obj
+/src/Model/bin
+/src/Model.Test/obj
+/src/Model.Test/bin
+/src/Test/obj
+/src/Test/bin
