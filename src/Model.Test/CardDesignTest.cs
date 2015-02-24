@@ -1,5 +1,7 @@
 ﻿using Model;
 using NUnit.Framework;
+using System.Data;
+using System.Linq;
 
 namespace Model.Test
 {
@@ -9,9 +11,10 @@ namespace Model.Test
         [Test]
         public void ShouldLoadCards()
         {
+            //System.Data.SqlClient
             var dao = new CardDesignEntities();
-            var x = dao.AlchemyCards;
-            var y = dao.AlchemyElements;
+            var x = dao.AlchemyCards.ToList();
+            var y = dao.AlchemyElements.ToList();
             Assert.That(y,Is.Not.Empty);
         }
     }
