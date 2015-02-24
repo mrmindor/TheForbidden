@@ -1,0 +1,150 @@
+﻿@model Model.AlchemyCard
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>AlchemyCard</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Element, "Element", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Element", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Element, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rank, "Rank", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.DropDownList("Rank", null, htmlAttributes: new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Rank, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VictoryPoints, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VictoryPoints, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.VictoryPoints, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AlchemyCosts)
+            <div class="col-md-10">
+                <div id="table" class="table-editable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>ElementA</th>
+                                <th>ElementB</th>
+                                <th>ElementC</th>
+                                <th>ElementD</th>
+                                <th><span class="table-add glyphicon glyphicon-plus"></span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@if (Model.AlchemyCosts != null)
+                            {
+                                foreach (var cost in Model.AlchemyCosts)
+                                {
+                                    Html.RenderPartial("_AlchemyCostDisplay", cost);
+                                }
+                            }*@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        //var $TABLE = $('#table');
+        //var $BTN = $('#export-btn');
+        //var $EXPORT = $('#export');
+
+        //$('.table-add').click(function () {
+        //    var $clone = $TABLE.find('tr.hide').clone(true).removeClass('hide table-line');
+        //    $TABLE.find('table').append($clone);
+        //});
+
+        //$('.table-remove').click(function () {
+        //    $(this).parents('tr').detach();
+        //});
+
+        //$('.table-up').click(function () {
+        //    var $row = $(this).parents('tr');
+        //    if ($row.index() === 1) return; // Don't go above the header
+        //    $row.prev().before($row.get(0));
+        //});
+
+        //$('.table-down').click(function () {
+        //    var $row = $(this).parents('tr');
+        //    $row.next().after($row.get(0));
+        //});
+
+        //// A few jQuery helpers for exporting only
+        //jQuery.fn.pop = [].pop;
+        //jQuery.fn.shift = [].shift;
+
+        //$BTN.click(function () {
+        //    var $rows = $TABLE.find('tr:not(:hidden)');
+        //    var headers = [];
+        //    var data = [];
+
+        //    // Get the headers (add special header logic here)
+        //    $($rows.shift()).find('th:not(:empty)').each(function () {
+        //        headers.push($(this).text().toLowerCase());
+        //    });
+
+        //    // Turn all existing rows into a loopable array
+        //    $rows.each(function () {
+        //        var $td = $(this).find('td');
+        //        var h = {};
+
+        //        // Use the headers from earlier to name our hash keys
+        //        headers.forEach(function (header, i) {
+        //            h[header] = $td.eq(i).text();
+        //        });
+
+        //        data.push(h);
+        //    });
+
+        //    // Output the result
+        //    $EXPORT.text(JSON.stringify(data));
+        //});
+    </script>
+}
+

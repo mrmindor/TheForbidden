@@ -158,7 +158,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AlchemyCardsController.cs" />
+    <Compile Include="Controllers\AlchemyElementsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlchemyRanksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -226,6 +229,23 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\AlchemyElements\Create.cshtml" />
+    <Content Include="Views\AlchemyElements\Delete.cshtml" />
+    <Content Include="Views\AlchemyElements\Details.cshtml" />
+    <Content Include="Views\AlchemyElements\Edit.cshtml" />
+    <Content Include="Views\AlchemyElements\Index.cshtml" />
+    <Content Include="Views\AlchemyCards\Create.cshtml" />
+    <Content Include="Views\AlchemyCards\Delete.cshtml" />
+    <Content Include="Views\AlchemyCards\Details.cshtml" />
+    <Content Include="Views\AlchemyCards\Edit.cshtml" />
+    <Content Include="Views\AlchemyCards\Index.cshtml" />
+    <Content Include="Views\AlchemyRanks\Create.cshtml" />
+    <Content Include="Views\AlchemyRanks\Delete.cshtml" />
+    <Content Include="Views\AlchemyRanks\Details.cshtml" />
+    <Content Include="Views\AlchemyRanks\Edit.cshtml" />
+    <Content Include="Views\AlchemyRanks\Index.cshtml" />
+    <Content Include="Views\AlchemyCards\_AlchemyCost.cshtml" />
+    <Content Include="Views\AlchemyCards\_AlchemyCostDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -236,6 +256,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{bcc2a753-bf48-4daf-af96-d84ffc8d4202}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,78 @@
+﻿@model Model.AlchemyCard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AlchemyCard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AlchemyElement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlchemyElement.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AlchemyRank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlchemyRank.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VictoryPoints)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VictoryPoints)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AlchemyCosts)
+        </dt>
+        <dd>
+            <div >
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>ElementA</th>
+                            <th>ElementB</th>
+                            <th>ElementC</th>
+                            <th>ElementD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.AlchemyCosts != null)
+                    {
+                        foreach (var cost in Model.AlchemyCosts)
+                        {
+                            Html.RenderPartial("_AlchemyCostDisplay", cost);
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
