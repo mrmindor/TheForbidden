@@ -260,12 +260,11 @@
     <Content Include="Views\AlchemyRanks\Details.cshtml" />
     <Content Include="Views\AlchemyRanks\Edit.cshtml" />
     <Content Include="Views\AlchemyRanks\Index.cshtml" />
-    <Content Include="Views\AlchemyCards\_AlchemyCostDisplay.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AlchemyCost.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AlchemyCost.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AlchemyElement.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\_CreateAlchemyCost.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AlchemyCard.cshtml" />
+    <Content Include="Views\AlchemyCards\_CostsTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

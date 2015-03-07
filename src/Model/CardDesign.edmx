@@ -18,6 +18,7 @@
         <EntityType Name="AlchemyCost">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="CardId" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CardId" Type="int" Nullable="false" />
@@ -245,6 +246,12 @@ warning 6002: The table/view 'CardDesign.dbo.GoalCards' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="MoveCostDown" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="costId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MoveCostUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="costId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="CardDesignModelStoreContainer">
           <EntitySet Name="AlchemyCards" EntityType="Self.AlchemyCards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlchemyCost" EntityType="Self.AlchemyCost" Schema="dbo" store:Type="Tables" />
@@ -345,6 +352,7 @@ warning 6002: The table/view 'CardDesign.dbo.GoalCards' does not have a primary 
         <EntityType Name="AlchemyCost">
           <Key>
             <PropertyRef Name="Id" />
+            <PropertyRef Name="CardId" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CardId" Type="Int32" Nullable="false" />
@@ -416,8 +424,11 @@ warning 6002: The table/view 'CardDesign.dbo.GoalCards' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_AlchemyCost_AlchemyCards">
-          <End Role="AlchemyCards" Type="Self.AlchemyCard" Multiplicity="1" />
-          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" />
+          <End Role="AlchemyCards" Type="Self.AlchemyCard" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AlchemyCost" Type="Self.AlchemyCost" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="AlchemyCards">
               <PropertyRef Name="Id" />
@@ -522,6 +533,12 @@ warning 6002: The table/view 'CardDesign.dbo.GoalCards' does not have a primary 
             <End Role="AlchemyCard" EntitySet="AlchemyCards" />
             <End Role="AlchemyGoal" EntitySet="AlchemyGoals" />
           </AssociationSet>
+          <FunctionImport Name="MoveCostDown">
+            <Parameter Name="costId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MoveCostUp">
+            <Parameter Name="costId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="DeckCards">
           <End Type="CardDesignModel.AlchemyCard" Role="AlchemyCard" Multiplicity="*" />
@@ -635,6 +652,8 @@ warning 6002: The table/view 'CardDesign.dbo.GoalCards' does not have a primary 
               <ScalarProperty Name="Id" ColumnName="CardId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="MoveCostDown" FunctionName="CardDesignModel.Store.MoveCostDown" />
+          <FunctionImportMapping FunctionImportName="MoveCostUp" FunctionName="CardDesignModel.Store.MoveCostUp" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

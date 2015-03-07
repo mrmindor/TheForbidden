@@ -81,6 +81,7 @@
     <Compile Include="Deck.cs">
       <DependentUpon>CardDesign.tt</DependentUpon>
     </Compile>
+    <Compile Include="PartialAlchemyCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

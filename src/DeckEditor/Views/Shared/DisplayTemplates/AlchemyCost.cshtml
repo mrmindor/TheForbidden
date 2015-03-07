@@ -1,19 +1,7 @@
 ﻿@model Model.AlchemyCost
-<tr id="cost-@Model.Id" data-id="@Model.Id" data-cardid="@Model.CardId">
-    <td>@Html.DisplayFor(model => model.Order)</td>
+<tr>
     <td>@Html.DisplayFor(model => model.AlchemyElement)</td>
     <td>@Html.DisplayFor(model => model.AlchemyElement1)</td>
     <td>@Html.DisplayFor(model => model.AlchemyElement2)</td>
     <td>@Html.DisplayFor(model => model.AlchemyElement3)</td>
-    <td>
-
-        <span class="glyphicon glyphicon-arrow-up"></span>
-        <span class="glyphicon glyphicon-arrow-down"></span>
-        <a href="@Url.Action("DeleteAlchemyCost","AlchemyCosts", new { id = Model.Id })">
-            <i class="glyphicon glyphicon-remove"></i>
-            <span class="sr-only">Delete</span>
-        </a>
-        <span class="glyphicon  glyphicon-pencil"></span>
-        <span class="glyphicon glyphicon-edit"></span>
-    </td>
 </tr>

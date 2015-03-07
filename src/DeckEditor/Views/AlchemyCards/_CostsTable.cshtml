@@ -1,0 +1,17 @@
+﻿@model Model.AlchemyCard
+<table class="table">
+    <thead>
+        <tr>
+            <th>ElementA</th>
+            <th>ElementB</th>
+            <th>ElementC</th>
+            <th>ElementD</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.EditorFor(model => model.Costs)
+        <tr><td colspan="5"><span class="glyphicon glyphicon-plus"></span></td></tr>
+    </tbody>
+</table>
+

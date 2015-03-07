@@ -25,7 +25,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AlchemyElement.Name)
+            @Html.DisplayFor(model => model.AlchemyElement)
         </dd>
 
         <dt>
@@ -43,7 +43,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Order</th>
                             <th>ElementA</th>
                             <th>ElementB</th>
                             <th>ElementC</th>
@@ -51,13 +50,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.AlchemyCosts != null)
-                        {
-                            foreach (var cost in Model.AlchemyCosts)
-                            {
-                                Html.DisplayFor(m=> cost);
-                            }
-                        }
+                        @Html.DisplayFor(model => model.Costs)
                     </tbody>
                 </table>
             </div>

@@ -1,63 +1,14 @@
 ﻿@model Model.AlchemyCost
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>AlchemyCost</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        @Html.HiddenFor(model => model.CardId)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ElementA, "ElementA", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ElementA", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ElementA, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ElementB, "ElementB", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ElementB", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ElementB, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ElementC, "ElementC", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ElementC", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ElementC, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ElementD, "ElementD", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ElementD", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ElementD, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-
+<tr id="cost-@Model.Id" data-id="@Model.Id" data-cardid="@Model.CardId">
+    <td>@Html.DisplayFor(model => model.AlchemyElement)</td>
+    <td>@Html.DisplayFor(model => model.AlchemyElement1)</td>
+    <td>@Html.DisplayFor(model => model.AlchemyElement2)</td>
+    <td>@Html.DisplayFor(model => model.AlchemyElement3)</td>
+    <td>
+        <span class="edit-up glyphicon glyphicon-arrow-up"></span>
+        <span class="edit-down glyphicon glyphicon-arrow-down"></span>
+        <span class="edit-remove glyphicon glyphicon-remove"></span>
+        <span class="edit glyphicon glyphicon-pencil"></span>
+        <span class="edit glyphicon glyphicon-edit"></span>
+    </td>
+</tr>

@@ -124,6 +124,35 @@ namespace DeckEditor.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public async Task<ActionResult> MoveCostUp(int cardId, int costId)
+        {
+            AlchemyCost cost = await _db.AlchemyCosts.FindAsync(costId);
+
+            if(cost == null || cost.CardId != cardId)
+            {
+                return HttpNotFound();
+            }
+            _db.MoveCostUp(costId);
+            var card = await _db.AlchemyCards.FindAsync(cardId);
+            
+            return PartialView("_CostsTable", card);
+
+        }
+        [HttpPost]
+        public async Task<ActionResult> MoveCostDown(int cardId, int costId)
+        {
+            AlchemyCost cost = await _db.AlchemyCosts.FindAsync(costId);
+
+            if(cost == null || cost.CardId != cardId)
+            {
+                return HttpNotFound();
+            }
+            _db.MoveCostDown(costId);
+            var card = await _db.AlchemyCards.FindAsync(cardId);
+            
+            return PartialView("_CostsTable", card);
+        }
 
         protected override void Dispose(bool disposing)
         {
