@@ -27,7 +27,7 @@ namespace DeckEditor.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             AlchemyCard alchemyCard = await _db.AlchemyCards.FindAsync(id);
             if (alchemyCard == null)
@@ -69,7 +69,7 @@ namespace DeckEditor.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             AlchemyCard alchemyCard = await _db.AlchemyCards.FindAsync(id);
             if (alchemyCard == null)
@@ -104,7 +104,7 @@ namespace DeckEditor.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             AlchemyCard alchemyCard = await _db.AlchemyCards.FindAsync(id);
             if (alchemyCard == null)

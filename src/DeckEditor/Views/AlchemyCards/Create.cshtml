@@ -63,13 +63,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@if (Model.AlchemyCosts != null)
+                            @if (Model?.AlchemyCosts != null)
                             {
-                                foreach (var cost in Model.AlchemyCosts)
+                                foreach (var cost in Model?.AlchemyCosts)
                                 {
-                                    Html.RenderPartial("_AlchemyCostDisplay", cost);
+                                    Html.DisplayFor(m => cost);
+
                                 }
-                            }*@
+                            }
                         </tbody>
                     </table>
                 </div>

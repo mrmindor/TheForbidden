@@ -1,0 +1,68 @@
+﻿@model Model.AlchemyCard
+
+<div>
+    <h4>AlchemyCard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VictoryPoints)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VictoryPoints)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AlchemyElement.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlchemyElement.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AlchemyRank.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlchemyRank.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AlchemyCosts)
+        </dt>
+        <dd>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>ElementA</th>
+                            <th>ElementB</th>
+                            <th>ElementC</th>
+                            <th>ElementD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.AlchemyCosts != null)
+                        {
+                            foreach (var cost in Model.AlchemyCosts)
+                            {
+                                Html.DisplayFor(m=> cost);
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </dd>
+
+    </dl>
+</div>
+

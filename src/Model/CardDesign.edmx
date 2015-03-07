@@ -349,10 +349,10 @@ warning 6002: The table/view 'CardDesign.dbo.GoalCards' does not have a primary 
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CardId" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="Int32" Nullable="false" />
-          <Property Name="ElementA" Type="Int32" />
-          <Property Name="ElementB" Type="Int32" />
-          <Property Name="ElementC" Type="Int32" />
-          <Property Name="ElementD" Type="Int32" />
+          <Property Name="ElementA" Type="Int32" Nullable="true" />
+          <Property Name="ElementB" Type="Int32" Nullable="true" />
+          <Property Name="ElementC" Type="Int32" Nullable="true" />
+          <Property Name="ElementD" Type="Int32" Nullable="true" />
           <NavigationProperty Name="AlchemyCard" Relationship="Self.FK_AlchemyCost_AlchemyCards" FromRole="AlchemyCost" ToRole="AlchemyCards" />
           <NavigationProperty Name="AlchemyElement" Relationship="Self.FK_AlchemyCost_AlchemyElements_A" FromRole="AlchemyCost" ToRole="AlchemyElements" />
           <NavigationProperty Name="AlchemyElement1" Relationship="Self.FK_AlchemyCost_AlchemyElements_B" FromRole="AlchemyCost" ToRole="AlchemyElements" />
